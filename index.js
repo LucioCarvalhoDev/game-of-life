@@ -1,58 +1,48 @@
 const SIZE = 5;
 const MARGIN = 1;
 
-function repeat(times, func, ...args) {
-    while (times) {
-        func(args);
-        times--;
-    }
-}
-
 function createGrid(size = SIZE) {
-    // fill
-    const grid = [];
 
-    for (let l = 0; l < size; l++) {
-        grid[l] = Array(size).fill(0);
-    }
+    const grid = {
+        area: [],
+        point: ([x, y]) => {
+            const copy = Array.from(grid.area);
+            copy[x][y] = `${copy[x][y]}`;
+            return copy;
+        },
+        getNeighborsFromCell: ([line, col]) => {
+            let count = 0;
+            grid._neighboardsPositions.forEach(([posX, posY]) => {
+                try {
+                    if (grid.area[line + posX][col + posY])
+                        count++;
+                } catch { }
+            });
+            return count;
+        },
+        changeCell: (...list) => {
+            list.forEach(([line, col]) =>
+                grid.area[line][col] = +!grid.area[line][col]);
+        },
+        _neighboardsPositions: [
+            [-1, -1],
+            [-1, 0],
+            [-1, 1],
+            [0, -1],
+            [0, 1],
+            [1, -1],
+            [1, 0],
+            [1, 1]
+        ],
 
-    grid.neighbors = ([x, y]) => {
-        let c = 0;
-
-        grid[x - 1] || [][y - 1] == 1 ? c++ : '';
-        grid[x - 1] || [][y] == 1 ? c++ : '';
-        grid[x - 1] || [][y + 1] == 1 ? c++ : '';
-
-        grid[x] || [][y - 1] == 1 ? c++ : '';
-        grid[x] || [][y + 1] == 1 ? c++ : '';
-
-        grid[x + 1] || [][y - 1] == 1 ? c++ : '';
-        grid[x + 1] || [][y] == 1 ? c++ : '';
-        grid[x + 1] || [][y + 1] == 1 ? c++ : '';
-
-        return c;
     };
 
-    grid.point = (([x, y]) => {
-        const copy = Array.from(grid);
-        copy[x][y] = `${copy[x][y]}`;
-        return copy;
-    });
+    // fill
+    for (let l = 0; l < size; l++) {
+        grid.area[l] = Array(size).fill(0);
+    }
 
     return grid;
 }
 
-function changeCell(grid, ...list) {
-    list.forEach(([line, roll]) => grid[line][roll] = +!grid[line][roll]);
-}
-
-function getNeighbors(grid, coords) {
-    const len = grid.length;
-    let neighbors = 0;
-}
-
 const grid = createGrid();
-changeCell(grid, [1, 0]);
-changeCell(grid, [0, 1]);
-console.log(grid.neighbors([0, 0]));
-console.log(grid);
