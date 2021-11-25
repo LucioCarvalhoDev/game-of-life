@@ -19,13 +19,13 @@
         <table class="m_grid">
             <tr class="m_grid_line">
                 <td class="m_grid_line_cell" data-state="1">a</td>
-                <td class="m_grid_line_cell">a</td>
-                <td class="m_grid_line_cell">a</td>
+                <td class="m_grid_line_cell" data-state="0">a</td>
+                <td class="m_grid_line_cell" data-state="0">a</td>
             </tr>
             <tr class="m_grid_line">
-                <td class="m_grid_line_cell">a</td>
-                <td class="m_grid_line_cell">a</td>
-                <td class="m_grid_line_cell">a</td>
+                <td class="m_grid_line_cell" data-state="0">a</td>
+                <td class="m_grid_line_cell" data-state="0">a</td>
+                <td class="m_grid_line_cell" data-state="0">a</td>
             </tr>
             <button class="m_grid play">Go</button>
         </table>
@@ -33,6 +33,15 @@
 
     <script type="module">
         import Grid from './js/Grid.js';
+        
+        const elemGrid = document.querySelector('.m_grid');
+        const cells = Array.from(document.querySelectorAll('.m_grid_line_cell'));
+
+        cells.forEach(cell => {
+            cell.onclick = (e) => {
+                cell.dataset.state = +!+cell.dataset.state;
+            }
+        })
         
     </script>
 </body>
