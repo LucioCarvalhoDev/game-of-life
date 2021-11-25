@@ -98,3 +98,5 @@ export default class Grid {
         this.area[x][y] = state;
     }
 }
+
+document.Grid = Grid; // dev
