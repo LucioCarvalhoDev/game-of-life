@@ -15,6 +15,20 @@ export default class Grid {
         }
     }
 
+    evalCell(cell) {
+        let state = this.get(cell);
+        let neighboards = this.countNeighboards(cell);
+        if (state) {
+            if (neighboards > 3 || neighboards < 2)
+                state = 0;
+        } else {
+            if (neighboards == 3)
+                state = 1;
+        }
+
+        return state;
+    }
+
     static neighboards() {
         return [
             [-1, -1],
@@ -28,11 +42,20 @@ export default class Grid {
         ];
     }
 
-    countNeighboards(cell) {
+    static nextGen(grid) {
+
+        let res = grid.area.map((line, x) => {
+            return line.map((item, y) => grid.evalCell([x, y]));
+        });
+
+        return res;
+    }
+
+    countNeighboards([line, col]) {
         let acc = 0;
 
         Grid.neighboards().forEach(([x, y]) => {
-            if (this.get([x, y]) == 1)
+            if (this.get([line + x, col + y]) == 1)
                 acc++;
         });
 
@@ -55,51 +78,4 @@ export default class Grid {
     set([x, y], state) {
         this.area[x][y] = state;
     }
-}
-
-function createGrid(size = SIZE) {
-
-    const grid = {
-        area: [],
-        point: ([x, y]) => {
-            const copy = Array.from(grid.area);
-            copy[x][y] = `${copy[x][y]}`;
-            return copy;
-        },
-        get: ([line, col]) => {
-            return grid.area[line][col];
-        },
-        getNeighborsFromCell: ([line, col]) => {
-            let count = 0;
-            grid._neighboardsPositions.forEach(([posX, posY]) => {
-                try {
-                    if (grid.area[line + posX][col + posY])
-                        count++;
-                } catch { }
-            });
-            return count;
-        },
-        changeCell: (state, ...list) => {
-            list.forEach(([line, col]) =>
-                grid.area[line][col] = state);
-        },
-        _neighboardsPositions: [
-            [-1, -1],
-            [-1, 0],
-            [-1, 1],
-            [0, -1],
-            [0, 1],
-            [1, -1],
-            [1, 0],
-            [1, 1]
-        ],
-
-    };
-
-    // fill
-    for (let l = 0; l < size; l++) {
-        grid.area[l] = Array(size).fill(0);
-    }
-
-    return grid;
 }
