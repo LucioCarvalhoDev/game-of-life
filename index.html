@@ -17,42 +17,31 @@
 
     <main class="m">
         <table class="m_grid">
-            <tr class="m_grid_line">
-                <td class="m_grid_line_cell" data-state="1"></td>
-                <td class="m_grid_line_cell" data-state="0"></td>
-                <td class="m_grid_line_cell" data-state="0"></td>
-            </tr>
-            <tr class="m_grid_line">
-                <td class="m_grid_line_cell" data-state="0"></td>
-                <td class="m_grid_line_cell" data-state="0"></td>
-                <td class="m_grid_line_cell" data-state="0"></td>
-            </tr>
+            <tbody class="m_grid_area">
+                <tr class="m_grid_area_line">
+                    <td class="m_grid_area_line_cell" data-state="1"></td>
+                    <td class="m_grid_area_line_cell" data-state="0"></td>
+                    <td class="m_grid_area_line_cell" data-state="0"></td>
+                </tr>
+                <tr class="m_grid_area_line">
+                    <td class="m_grid_area_line_cell" data-state="0"></td>
+                    <td class="m_grid_area_line_cell" data-state="0"></td>
+                    <td class="m_grid_area_line_cell" data-state="0"></td>
+                </tr>
+            </tbody>
+            <tfoot class="m_grid_controls">
+                <tr class="m_grid_controls_panel">
+                    <td class ="m_grid_controls_panel_play" colspan="999">
+                        <button class="">Play</button>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
-        <button class="">Go</button>
     </main>
 
     <script type="module">
-        import Grid from './js/Grid.js';
-        const grid = new Grid(5);
-
-        const elemGrid = document.querySelector('.m_grid');
-        
-        // cria grid
-        elemGrid.innerHTML = grid.area.map(line => {
-            return `<tr class="m_grid_line">${line.map(cell => 
-                `<td class="m_grid_line_cell" data-state="0"></td>`
-            ).join('')}</td>`
-        }).join('')
-
-        
-        const cells = Array.from(document.querySelectorAll('.m_grid_line_cell'));
-
-        cells.forEach(cell => {
-            cell.onclick = (e) => {
-                cell.dataset.state = +!+cell.dataset.state;
-            }
-        })
-        
+        import Controller from './js/Controller.js';
+        new Controller(9);
     </script>
 </body>
 </html>

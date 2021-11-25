@@ -1,5 +1,9 @@
 .m_grid {
-    border: 1px solid black;
+    overflow: hidden;
+    border-collapse: separate;
+    border: 2px solid black;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     margin: 2px;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -9,21 +13,34 @@
     user-select: none;
 }
 
-.m_grid:hover {
+.m_grid_area {
+    
+}
+
+.m_grid_area:hover {
     cursor: pointer;
 }
 
-.m_grid_line {
-    border: 1px solid black;
+.m_grid_area_line {
+    /* border: 1px solid black; */
 }
 
-.m_grid_line_cell {
+.m_grid_area_line_cell {
     border: 1px solid black;
     width: 1.2rem;
     height: 1.2rem;
     transition: all 250ms;
 }
 
-.m_grid_line_cell[data-state="1"] {
+.m_grid_area_line_cell[data-state="1"] {
     background: green;
+}
+
+.m_grid_controls {
+    height: 1.2rem;
+    background: gray;
+}
+
+.m_grid_controls_panel td {
+    padding: 5px;
 }
