@@ -1,6 +1,5 @@
 export default class Grid {
     /**
-     * @constructor
      * @param {number} size 
      */
     constructor(size) {
@@ -15,6 +14,11 @@ export default class Grid {
         }
     }
 
+    /**
+     * Avalia o estado da celula na proxima geração
+     * @param {[number, number]} cell 
+     * @returns {number} 0 ou 1
+     */
     evalCell(cell) {
         let state = this.get(cell);
         let neighboards = this.countNeighboards(cell);
@@ -42,6 +46,11 @@ export default class Grid {
         ];
     }
 
+    /**
+     * 
+     * @param {Grid} grid 
+     * @returns grid.area
+     */
     static nextGen(grid) {
 
         let res = grid.area.map((line, x) => {
@@ -51,6 +60,11 @@ export default class Grid {
         return res;
     }
 
+    /**
+     * 
+     * @param {[number, number]} cell
+     * @returns {number} quantidade de vizinhos vivos
+     */
     countNeighboards([line, col]) {
         let acc = 0;
 
@@ -75,6 +89,11 @@ export default class Grid {
         }
     }
 
+    /**
+     * 
+     * @param {[number, number]} param0 
+     * @param {*} number 
+     */
     set([x, y], state) {
         this.area[x][y] = state;
     }
