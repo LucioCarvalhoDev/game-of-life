@@ -32,7 +32,7 @@
             <tfoot class="m_grid_controls">
                 <tr class="m_grid_controls_panel">
                     <td class ="m_grid_controls_panel_play" colspan="999">
-                        <button class="">Play</button>
+                        <button class="" data-play="false">Play</button>
                     </td>
                 </tr>
             </tfoot>
@@ -41,7 +41,8 @@
 
     <script type="module">
         import Controller from './js/Controller.js';
-        new Controller(9);
+        const controller = new Controller(3);
+        document.controller = controller;
     </script>
 </body>
 </html>
