@@ -18,23 +18,33 @@
     <main class="m">
         <table class="m_grid">
             <tr class="m_grid_line">
-                <td class="m_grid_line_cell" data-state="1">a</td>
-                <td class="m_grid_line_cell" data-state="0">a</td>
-                <td class="m_grid_line_cell" data-state="0">a</td>
+                <td class="m_grid_line_cell" data-state="1"></td>
+                <td class="m_grid_line_cell" data-state="0"></td>
+                <td class="m_grid_line_cell" data-state="0"></td>
             </tr>
             <tr class="m_grid_line">
-                <td class="m_grid_line_cell" data-state="0">a</td>
-                <td class="m_grid_line_cell" data-state="0">a</td>
-                <td class="m_grid_line_cell" data-state="0">a</td>
+                <td class="m_grid_line_cell" data-state="0"></td>
+                <td class="m_grid_line_cell" data-state="0"></td>
+                <td class="m_grid_line_cell" data-state="0"></td>
             </tr>
-            <button class="m_grid play">Go</button>
         </table>
+        <button class="">Go</button>
     </main>
 
     <script type="module">
         import Grid from './js/Grid.js';
-        
+        const grid = new Grid(5);
+
         const elemGrid = document.querySelector('.m_grid');
+        
+        // cria grid
+        elemGrid.innerHTML = grid.area.map(line => {
+            return `<tr class="m_grid_line">${line.map(cell => 
+                `<td class="m_grid_line_cell" data-state="0"></td>`
+            ).join('')}</td>`
+        }).join('')
+
+        
         const cells = Array.from(document.querySelectorAll('.m_grid_line_cell'));
 
         cells.forEach(cell => {

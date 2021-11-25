@@ -1,5 +1,16 @@
 .m_grid {
     border: 1px solid black;
+    margin: 2px;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+}
+
+.m_grid:hover {
+    cursor: pointer;
 }
 
 .m_grid_line {
@@ -10,6 +21,7 @@
     border: 1px solid black;
     width: 1.2rem;
     height: 1.2rem;
+    transition: all 250ms;
 }
 
 .m_grid_line_cell[data-state="1"] {
